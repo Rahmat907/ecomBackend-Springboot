@@ -1,78 +1,96 @@
-E-Commerce Backend
+# E-Commerce Backend (Spring Boot)
 
-A RESTful backend API for an e-commerce application, built with Java and Spring Boot. It handles products, orders, and order items, and exposes clean DTO-based responses to clients.
+E-commerce backend REST API built with Java and Spring Boot, featuring authentication and authorization, product and order management, and DTO-based responses.
 
-Features
-Product management (create, read, update, delete)
-Order placement and order history
-Order items with price and subtotal calculation (BigDecimal for money)
-DTO layer for clean API responses (OrderResponse, OrderItemDTO)
-Layered architecture: Controller, Service, Repository
-<Add: JWT authentication / user management / cart, if you have them>
-Tech Stack
-Area	Technology
-Language	Java <17>
-Framework	Spring Boot
-Data access	Spring Data JPA / Hibernate
-Database	<MySQL / PostgreSQL / H2>
-Build tool	<Maven / Gradle>
-Utilities	Lombok
-Project Structure
+The project follows a layered architecture (Controller, Service, Repository) and uses DTOs to keep API responses separate from database entities. Money values are handled with `BigDecimal` to avoid floating-point errors.
+
+## Features
+
+- Authentication and authorization with Spring Security
+- Product management (create, read, update, delete)
+- Order placement and order details with item-wise quantity, price and subtotal
+- DTO-based API responses (`OrderResponse`, `OrderItemDTO`)
+- Layered architecture: Controller, Service, Repository
+
+## Tech Stack
+
+| Area | Technology |
+|---|---|
+| Language | Java |
+| Framework | Spring Boot |
+| Security | Spring Security |
+| Data access | Spring Data JPA, Hibernate |
+| Database | MySQL |
+| Build tool | Maven |
+| Utilities | Lombok |
+
+## Project Structure
+
+```
 src/main/java/com/backendapi/api
-├── controller      # REST controllers
-├── service         # Business logic
-├── repository      # JPA repositories
-├── model           # Entities (OrderModel, OrderItem, Product, ...)
+├── controller
+├── service
+├── repository
+├── model
 └── dtos
-    └── respdto     # Response DTOs (OrderResponse, OrderItemDTO, ...)
-Getting Started
-Prerequisites
-JDK <17> or higher
-<Maven / Gradle>
-<MySQL / PostgreSQL> running locally (skip if using H2)
-Installation
-bash
-# 1. Clone the repository
-git clone https://github.com/<your-username>/<repo-name>.git
+    └── respdto
+```
 
-# 2. Go to the project folder
-cd <repo-name>
-Configure the database
+## Getting Started
 
-Edit src/main/resources/application.properties:
+### Prerequisites
 
-properties
-spring.datasource.url=jdbc:mysql://localhost:3306/<db_name>
-spring.datasource.username=<your_username>
-spring.datasource.password=<your_password>
+- JDK 17 or higher
+- MySQL running locally
+
+### Clone the repository
+
+```bash
+git clone https://github.com/Rahmat907/ecomBackend-Springboot.git
+cd ecomBackend-Springboot
+```
+
+### Configure the application
+
+Create `src/main/resources/application.properties` and add your own values:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/your_db_name
+spring.datasource.username=your_username
+spring.datasource.password=your_password
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
+```
 
-Never commit real passwords. Use environment variables or a separate local config file.
+This file is not included in the repository because it contains private credentials.
 
-Run the application
-bash
-# Maven
+### Run the application
+
+```bash
 ./mvnw spring-boot:run
+```
 
-# Gradle
-./gradlew bootRun
+On Windows:
 
-The server starts at http://localhost:8080.
+```bash
+mvnw.cmd spring-boot:run
+```
 
-API Endpoints
+The server starts at `http://localhost:8080`.
 
-Update this table to match your controllers.
+## API Endpoints
 
-Method	Endpoint	Description
-GET	/api/products	Get all products
-GET	/api/products/{id}	Get product by ID
-POST	/api/products	Create a product
-POST	/api/orders	Place a new order
-GET	/api/orders	Get all orders
-GET	/api/orders/{id}	Get order by ID
-Sample response: GET /api/orders/1
-json
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/products` | Get all products |
+| GET | `/api/products/{id}` | Get product by ID |
+| POST | `/api/products` | Create a product |
+| POST | `/api/orders` | Place a new order |
+| GET | `/api/orders/{id}` | Get order by ID |
+
+### Sample response: `GET /api/orders/1`
+
+```json
 {
   "id": 1,
   "totalAmount": 1998.00,
@@ -88,15 +106,16 @@ json
   ],
   "createdAt": "2026-10-05T10:30:00"
 }
-Running Tests
-bash
-./mvnw test
-Future Improvements
-Authentication and authorization (Spring Security + JWT)
-Payment integration
-Pagination and filtering for products and orders
-Docker support
-Deployment on AWS
-Author
+```
 
-Rahmat Ali GitHub: @Rahmat907
+## Future Improvements
+
+- Payment integration
+- Pagination and filtering
+- Docker support
+- Deployment on AWS
+
+## Author
+
+**Rahmat Ali**
+GitHub: [Rahmat907](https://github.com/Rahmat907)
