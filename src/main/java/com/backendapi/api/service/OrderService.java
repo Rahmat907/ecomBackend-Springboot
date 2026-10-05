@@ -18,6 +18,7 @@ import com.backendapi.api.model.OrderModel;
 import com.backendapi.api.model.UserModel;
 import com.backendapi.api.model.enums.OrderStatus;
 import com.backendapi.api.service.UserService;
+import com.backendapi.api.dtos.respdto.OrderItemDTO;
 @Service 
 @RequiredArgsConstructor 
 public class OrderService {
@@ -50,6 +51,19 @@ public class OrderService {
             OrderModel savedOrder  = orderRepo.save(order);
 
             cartService.clearCart(userId);
-        return null;
+
+        return Optional.of(mapToOrderResponse(savedOrder));
     }
+
+    private OrderResponse mapToOrderResponse(OrderModel order){
+        OrderResponse orderDto = new OrderResponse(
+        order.getOrderId(),
+        order.getTotalAmount(),
+        order.getStatus(),
+        order.getItems().stream()
+        .map(orderItem -> new OrderItemDTO(orderItem.getId(),orderItem.getProduct().getProductId(),orderItem.getQuantity(),orderItem.getPrice(),orderItem.getPrice().multiply(new BigDecimal(orderItem.getQuantity())))).toList(),
+    order.getCreatedAt());
+        return orderDto;
+    }
+
 }

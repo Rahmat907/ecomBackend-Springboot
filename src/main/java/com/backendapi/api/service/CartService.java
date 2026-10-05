@@ -88,6 +88,6 @@ public class CartService {
     }
 
     public void clearCart(String userId){
-        userRepo.findById(Long.valuOf(userId)).if
+userRepo.findById(Long.valueOf(userId)).ifPresent(user -> cartItemsRepo.deleteByUser(user) );
     }
 }
