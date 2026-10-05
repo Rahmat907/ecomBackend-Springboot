@@ -1,5 +1,7 @@
 package com.backendapi.api.controller;
 
+import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +22,8 @@ public class OrderController {
 
     @PostMapping ("/")
     public ResponseEntity<OrderResponse> createOrder(@RequestHeader("X-User-ID") String userId){
-        OrderResponse order = orderService.createOrder(userId);
-        return new ResponseEntity<>(order,HttpStatus.CREATED);
+        Optional<OrderResponse> order = orderService.createOrder(userId);
+        return new ResponseEntity<>(order.get(),HttpStatus.CREATED);
     }
 
 }

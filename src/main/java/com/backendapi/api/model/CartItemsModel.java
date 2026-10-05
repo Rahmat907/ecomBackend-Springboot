@@ -1,5 +1,6 @@
 package com.backendapi.api.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,7 +32,7 @@ public class CartItemsModel {
     @JoinColumn (name = "product_id", nullable = false)
     private  ProductModel product;
     private Integer quantity;
-
+    private BigDecimal price;
     @CreationTimestamp 
     private LocalDateTime createdAt;
     @UpdateTimestamp 

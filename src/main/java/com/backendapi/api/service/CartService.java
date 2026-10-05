@@ -86,4 +86,8 @@ public class CartService {
         .map(cartItemsRepo :: findByUser)
         .orElseGet(List :: of);
     }
+
+    public void clearCart(String userId){
+        userRepo.findById(Long.valuOf(userId)).if
+    }
 }
