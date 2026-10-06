@@ -17,14 +17,12 @@ import com.backendapi.api.model.OrderItems;
 import com.backendapi.api.model.OrderModel;
 import com.backendapi.api.model.UserModel;
 import com.backendapi.api.model.enums.OrderStatus;
-import com.backendapi.api.service.UserService;
 import com.backendapi.api.dtos.respdto.OrderItemDTO;
 @Service 
 @RequiredArgsConstructor 
 public class OrderService {
     private final OrderRepo orderRepo;
     private final CartService cartService;
-    private final UserService userService;
     private final UserRepo userRepo;
     public Optional<OrderResponse> createOrder(String userId){
             // validate for cart items 

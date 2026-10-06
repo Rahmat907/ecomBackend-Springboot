@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.backendapi.api.dtos.reqdto.CartItemRequest;
-import com.backendapi.api.dtos.respdto.CartResponse;
 import com.backendapi.api.model.CartItemsModel;
 import com.backendapi.api.model.ProductModel;
 import com.backendapi.api.model.UserModel;
