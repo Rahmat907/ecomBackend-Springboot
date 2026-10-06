@@ -32,7 +32,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name = "users")
 public class UserModel {
     @Id
-    @GeneratedValue(strategy =  GenerationType.AUTO)
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false , unique = true)
     private String userName;

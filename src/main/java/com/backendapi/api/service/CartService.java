@@ -1,5 +1,6 @@
 package com.backendapi.api.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +52,7 @@ public class CartService {
         if(existingcart != null){
             // update the qunatity
             existingcart.setQuantity(existingcart.getQuantity() + cartItemRequest.getQuantity());
+            existingcart.setPrice(existingcart.getPrice().multiply(BigDecimal.valueOf(existingcart.getQuantity())));
         }else{
             // create new cart
             CartItemsModel newCart = new CartItemsModel();

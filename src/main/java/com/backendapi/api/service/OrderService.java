@@ -4,8 +4,8 @@ import com.backendapi.api.service.CartService;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import com.backendapi.api.repo.OrderRepo;
@@ -39,13 +39,15 @@ public class OrderService {
             UserModel user = userOpt.get() ;
             // calculate totalPrice 
             BigDecimal totalPrice = cart.stream()
-            .map(CartItemsModel :: getPrice).reduce(BigDecimal.ZERO ,BigDecimal:: add); 
+            .map(CartItemsModel :: getPrice)
+            .filter(Objects :: nonNull)
+            .reduce(BigDecimal.ZERO ,BigDecimal:: add); 
             // create order 
             OrderModel order = new OrderModel();
             order.setUserModel(user);
             order.setStatus(OrderStatus.CONFIRMED);
             order.setTotalAmount(totalPrice);
-            List<OrderItems> orderItems = cart.stream().map(item -> new OrderItems(null,item.getProduct(),item.getQuantity(),item.getPrice(),order)).toList();
+            List<OrderItems> orderItems = cart.stream().map(item -> new OrderItems(null,item.getProduct(),item.getQuantity(),item.getProduct().getPrice(),order)).toList();
             // clear the cart
             order.setItems(orderItems);
             OrderModel savedOrder  = orderRepo.save(order);
