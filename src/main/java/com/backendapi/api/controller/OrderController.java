@@ -26,5 +26,8 @@ public class OrderController {
         return order.map(orderResponse-> new ResponseEntity<>(orderResponse,HttpStatus.CREATED))
         .orElseGet(()-> ResponseEntity.notFound().build());
     }
-
+    // Actuator 
+    // features - Built in endpoints 
+    // Ablity to view real time metrics 
+    // customizable   
 }
