@@ -54,11 +54,6 @@ public class UserController {
         }
         return new ResponseEntity<>(lr.getLoginResponseDto(), HttpStatus.ACCEPTED);
     }
-
-    @GetMapping("/test")
-    String test(Authentication authentication) {
-        return "Hello " + authentication.getName();
-    }
     
     @GetMapping("/user")
     ResponseEntity<List<UserResponse>> getAllUser(){
