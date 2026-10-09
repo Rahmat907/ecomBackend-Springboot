@@ -53,7 +53,7 @@ public class UserController {
             return new ResponseEntity<>("please Provide correct password", HttpStatus.NOT_ACCEPTABLE);
         }
         return new ResponseEntity<>(lr.getLoginResponseDto(), HttpStatus.ACCEPTED);
-    }
+    } 
     
     @GetMapping("/user")
     ResponseEntity<List<UserResponse>> getAllUser(){
